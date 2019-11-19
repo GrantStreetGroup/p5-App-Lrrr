@@ -1,5 +1,6 @@
 #!/usr/bin/env perl
 # ABSTRACT: Little Restart Runner (Really)
+# PODNAME: lrrr
 
 =head1 SYNOPSIS
 
