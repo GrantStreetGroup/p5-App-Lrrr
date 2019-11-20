@@ -23,6 +23,14 @@ This program uses L<Mojo::Server::Morbo::Backend> classes to do the
 heavy lifting. The default is L<Mojo::Server::Morbo::Backend::Poll>.
 Choose a specific one by setting C<MOJO_MORBO_BACKEND>.
 
+=head1 OPTIONS
+
+=head2 C<-w>, C<--watch>
+
+A directory or directories to watch. Defaults to the first argument (if
+it's a path to a file) and the C<lib> and C<templates> directories in
+the current directory.
+
 =head1 ENVIRONMENT
 
 =over
@@ -54,13 +62,18 @@ use Pod::Usage qw( pod2usage );
 use Getopt::Long qw( GetOptions );
 use POSIX 'WNOHANG';
 
-my %opt = (
-    watch => \[ '.' ],
-);
+my %opt;
 GetOptions( \%opt,
     'watch|w=s@',
     'help|h' => sub { pod2usage(1) },
 );
+
+if ( !$opt{ watch } ) {
+    $opt{ watch } = \[ qw( lib templates ) ];
+    if ( -f $ARGV[0] ) {
+        push @${$opt{watch}}, $ARGV[0];
+    }
+}
 
 my $backend_class = 'Mojo::Server::Morbo::Backend::' . ( $ENV{MOJO_MORBO_BACKEND} // 'Poll' );
 if ( my $e = load_class $backend_class ) {
