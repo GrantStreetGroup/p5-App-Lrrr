@@ -59,9 +59,10 @@ use v5.16;
 use Mojo::Base -strict;
 use Mojo::Loader qw( load_class );
 use Pod::Usage qw( pod2usage );
-use Getopt::Long qw( GetOptions );
+use Getopt::Long qw( GetOptions Configure);
 use POSIX 'WNOHANG';
 
+Configure( 'require_order' );
 my %opt;
 GetOptions( \%opt,
     'watch|w=s@',
