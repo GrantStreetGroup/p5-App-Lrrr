@@ -65,6 +65,7 @@ use POSIX 'WNOHANG';
 my %opt;
 GetOptions( \%opt,
     'watch|w=s@',
+    'backend|b=s',
     'help|h' => sub { pod2usage(1) },
 );
 
@@ -75,7 +76,7 @@ if ( !$opt{ watch } ) {
     }
 }
 
-my $backend_class = 'Mojo::Server::Morbo::Backend::' . ( $ENV{MOJO_MORBO_BACKEND} // 'Poll' );
+my $backend_class = 'Mojo::Server::Morbo::Backend::' . ( $opt{backend} // $ENV{MOJO_MORBO_BACKEND} // 'Poll' );
 if ( my $e = load_class $backend_class ) {
     die $e if ref $e;
     die "Could not find class $backend_class in \@INC (\@INC includes @INC)\n";
