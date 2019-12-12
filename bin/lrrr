@@ -75,7 +75,11 @@ if ( !$opt{ watch } ) {
     if ( -f $ARGV[0] ) {
         push @{$opt{watch}}, $ARGV[0];
     }
+} else {
+  #process csv
+  $opt{watch} = [ map { split /,/ } @{$opt{watch}} ]
 }
+
 
 my $backend_class = 'Mojo::Server::Morbo::Backend::' . ( $opt{backend} // $ENV{MOJO_MORBO_BACKEND} // 'Poll' );
 if ( my $e = load_class $backend_class ) {
