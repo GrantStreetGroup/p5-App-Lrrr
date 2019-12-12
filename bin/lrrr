@@ -70,9 +70,9 @@ GetOptions( \%opt,
 );
 
 if ( !$opt{ watch } ) {
-    $opt{ watch } = \[ qw( lib templates ) ];
+    $opt{ watch } = [ qw( lib templates ) ];
     if ( -f $ARGV[0] ) {
-        push @${$opt{watch}}, $ARGV[0];
+        push @{$opt{watch}}, $ARGV[0];
     }
 }
 
@@ -82,7 +82,7 @@ if ( my $e = load_class $backend_class ) {
     die "Could not find class $backend_class in \@INC (\@INC includes @INC)\n";
 }
 
-my $backend = $backend_class->new( watch => ${ $opt{watch} } );
+my $backend = $backend_class->new( watch => $opt{watch} );
 my $finished = 0;
 my $worker_pid = 0;
 my $modified = 1;
