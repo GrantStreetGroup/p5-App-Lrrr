@@ -27,7 +27,7 @@ Choose a specific one by setting C<MOJO_MORBO_BACKEND>.
 
 =head2 C<-w>, C<--watch>
 
-A directory or directories to watch, seperated by commas. Defaults
+A directory or directories to watch, separated by commas. Defaults
 to the first argument (if it's a path to a file) and the C<lib>
 and C<templates> directories in the current directory.
 
