@@ -4,7 +4,7 @@
 
 =head1 SYNOPSIS
 
-    lrrr [--watch|-w <dir>]... <command>
+    lrrr [--watch|-w <dir[,dir...]> --backend|-b]... <command>
     lrrr --help|-h
 
 =head1 DESCRIPTION
@@ -27,9 +27,15 @@ Choose a specific one by setting C<MOJO_MORBO_BACKEND>.
 
 =head2 C<-w>, C<--watch>
 
-A directory or directories to watch. Defaults to the first argument (if
-it's a path to a file) and the C<lib> and C<templates> directories in
-the current directory.
+A directory or directories to watch, seperated by commas. Defaults
+to the first argument (if it's a path to a file) and the C<lib>
+and C<templates> directories in the current directory.
+
+=head2 C<-b>, C<--backend>
+
+Choose a specific backend for watching file changes. The default
+is C<Poll> (L<Mojo::Server::Morbo::Backend::Poll>). Takes
+precedence over the C<MOJO_MORBO_BACKEND> environment variable.
 
 =head1 ENVIRONMENT
 
